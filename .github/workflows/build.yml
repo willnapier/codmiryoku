@@ -30,7 +30,7 @@ jobs:
           west init -l config
           west update
           west zephyr-export
-          pip install -r zmk/zephyr/scripts/requirements.txt
+          pip install -r zmk/app/zephyr/scripts/requirements.txt
 
       - name: Build Totem Left
         run: |
@@ -45,7 +45,7 @@ jobs:
             -- -DSHIELD=totem_right -DZMK_CONFIG=./config
 
       - name: Upload firmware artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware
           path: |
