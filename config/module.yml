@@ -1,2 +1,5 @@
 name: config
-cmake: .
+build:
+  cmake: .
+  kconfig: totem.conf
+  
