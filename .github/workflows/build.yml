@@ -30,7 +30,6 @@ jobs:
           west init -l .
           west update
           west zephyr-export
-          pip install -r zmk/app/zephyr/scripts/requirements.txt
 
       - name: Build Totem Left
         run: |
