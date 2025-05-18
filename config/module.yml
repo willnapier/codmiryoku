@@ -2,4 +2,4 @@ name: config
 build:
   cmake: .
   kconfig: totem.conf
-  
+  board_root: boards
