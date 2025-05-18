@@ -27,10 +27,10 @@ jobs:
           sudo apt install -y ninja-build gperf ccache dfu-util device-tree-compiler wget \
                               python3-pip python3-setuptools python3-wheel xz-utils file \
                               make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
-          west init
+          west init -l config
           west update
           west zephyr-export
-          pip install -r zmk/app/zephyr/scripts/requirements.txt
+          pip install -r zmk/zephyr/scripts/requirements.txt
 
       - name: Build Totem Left
         run: |
@@ -45,7 +45,7 @@ jobs:
             -- -DSHIELD=totem_right -DZMK_CONFIG=./config
 
       - name: Upload firmware artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: firmware
           path: |
