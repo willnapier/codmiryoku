@@ -1,0 +1,7 @@
+# config/Kconfig
+
+menu "CodMiryoku Custom Config"
+
+# (Optional future configs can go here)
+
+endmenu
