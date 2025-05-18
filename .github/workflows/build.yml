@@ -45,7 +45,7 @@ jobs:
             -- -DSHIELD=totem_right -DZMK_CONFIG=./config
 
       - name: Upload firmware artifacts
-        uses: actions/upload-artifact@v3 # ← Fix by explicitly specifying full action path
+        uses: actions/upload-artifact@v3
         with:
           name: firmware
           path: |
