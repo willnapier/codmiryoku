@@ -1,4 +1,4 @@
-name: "Build Totem Firmware"
+name: Build CodMiryoku Firmware
 
 on:
   push:
@@ -9,15 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        board: [seeeduino_xiao_ble]
-        shield: [totem_left, totem_right]
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
@@ -25,14 +23,31 @@ jobs:
       - name: Install west and dependencies
         run: |
           pip install west
-          west init -l zmk
+          sudo apt update
+          sudo apt install -y ninja-build gperf ccache dfu-util device-tree-compiler wget \
+                              python3-pip python3-setuptools python3-wheel xz-utils file \
+                              make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+          west init -l config
           west update
           west zephyr-export
           pip install -r zmk/zephyr/scripts/requirements.txt
 
-      - name: Build ${{ matrix.shield }}
+      - name: Build Totem Left
         run: |
-          west build -s zmk/app -b ${{ matrix.board }} \
-            -d build/${{ matrix.shield }} \
-            -- -DSHIELD=${{ matrix.shield }} \
-               -DZMK_CONFIG=codmiryoku/config
+          west build -s zmk/app -d build/left \
+            -b seeeduino_xiao_ble \
+            -- -DSHIELD=totem_left -DZMK_CONFIG=./config
+
+      - name: Build Totem Right
+        run: |
+          west build -s zmk/app -d build/right \
+            -b seeeduino_xiao_ble \
+            -- -DSHIELD=totem_right -DZMK_CONFIG=./config
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware
+          path: |
+            build/left/zephyr/zmk.uf2
+            build/right/zephyr/zmk.uf2
