@@ -1,3 +1,81 @@
 // config/boards/shields/totem/totem.keymap
 
 #include "../../../totem.keymap"
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        #include "layers.dtsi"
+    };
+
+    behaviors {
+        u_mt: u_mt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        u_lt: u_lt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        // Tap-dance layer switches (indices match layer include order)
+        u_to_U_BASE: u_to_U_BASE {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 0>;
+        };
+
+        u_to_U_SYM: u_to_U_SYM {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 1>;
+        };
+
+        u_to_U_NUM: u_to_U_NUM {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 2>;
+        };
+
+        u_to_U_NAV: u_to_U_NAV {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 3>;
+        };
+
+        u_to_U_MEDIA: u_to_U_MEDIA {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 4>;
+        };
+
+        u_to_U_MOUSE: u_to_U_MOUSE {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 5>;
+        };
+
+        u_to_U_FUN: u_to_U_FUN {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to 6>;
+        };
+
+        // Optional: Add more as needed (e.g., EXTRA, TAP, etc.)
+    };
+};
