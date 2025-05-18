@@ -1,3 +1,4 @@
 name: codmiryoku
 build:
   cmake: .
+  kconfig: .
