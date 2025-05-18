@@ -1,2 +1,10 @@
 #include "mapping/38/totem.dtsi"
-#include "layers.dtsi"
+#include "layers/base.dtsi"
+#include "layers/nav.dtsi"
+#include "layers/num.dtsi"
+#include "layers/sym.dtsi"
+#include "layers/media.dtsi"
+#include "layers/mouse.dtsi"
+#include "layers/fun.dtsi"
+
+
