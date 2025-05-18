@@ -1,0 +1,4 @@
+# Totem – left half
+config SHIELD_TOTEM_LEFT
+    bool "Totem-left split shield"
+    depends on BOARD_SEEEDUINO_XIAO_BLE
