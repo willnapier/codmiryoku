@@ -1,9 +1,6 @@
-# config/boards/shields/totem/boards.cmake
+zephyr_library()
 
-set(SHIELD_LIST
-  totem
-  totem_left
-  totem_right
-)
+board_runner_args(seeeduino_xiao_ble "--shield=totem_left")
+board_runner_args(seeeduino_xiao_ble "--shield=totem_right")
 
 add_board_directory(${CMAKE_CURRENT_LIST_DIR}/..)
