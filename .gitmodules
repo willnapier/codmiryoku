@@ -1,4 +1,0 @@
-[submodule "zmk"]
-	path = zmk
-	url = https://github.com/zmkfirmware/zmk.git
-	branch = main
