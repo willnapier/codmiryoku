@@ -1,0 +1,3 @@
+// config/boards/shields/totem/totem.overlay
+
+#include "totem.dtsi"
