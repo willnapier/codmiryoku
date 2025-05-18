@@ -27,7 +27,7 @@ jobs:
           sudo apt install -y ninja-build gperf ccache dfu-util device-tree-compiler wget \
                               python3-pip python3-setuptools python3-wheel xz-utils file \
                               make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
-          west init -l config
+          west init -l .
           west update
           west zephyr-export
           pip install -r zmk/app/zephyr/scripts/requirements.txt
