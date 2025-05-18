@@ -1,12 +1,12 @@
 manifest:
-  defaults:
-    remote: zmkfirmware
-
   remotes:
     - name: zmkfirmware
-      url: https://github.com/zmkfirmware
+      url-base: https://github.com/zmkfirmware
     - name: willnapier
-      url: https://github.com/willnapier
+      url-base: https://github.com/willnapier
+
+  defaults:
+    remote: zmkfirmware
 
   projects:
     - name: zmk
@@ -16,6 +16,3 @@ manifest:
 
   self:
     path: config
-
-  # 👇 Add your config repo as a module to expose your shields
-  group-filter: [-zephyr]
