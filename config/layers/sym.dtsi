@@ -1,0 +1,22 @@
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        sym_layer {
+            label = "SYM";
+            bindings = <
+  // Top row
+                &kp LBRC     &kp AMPS     &kp ASTRK     &kp LPAR     &kp RBRC         &none        &none        &none         &none        &none
+
+  // Home row
+                &kp COLON    &kp DLLR     &kp PRCNT     &kp CARET    &kp PLUS         &none        &none        &none         &none        &none
+
+  // Bottom row
+                &kp TILDE    &kp EXCL     &kp AT        &kp HASH     &kp PIPE         &none        &none        &none         &none        &none        &none        &none
+
+  // Thumbs
+                               &kp LPAR     &kp RPAR     &kp UNDER                  &none        &none        &none
+            >;
+        };
+    };
+};

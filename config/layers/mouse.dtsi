@@ -1,0 +1,16 @@
+mouse_layer {
+  label = "MOUSE";
+  bindings = <
+    // Row 1 (Top)
+                  &none         &none         &none         &none         &none            &mkp REDO     &mkp PASTE    &mkp COPY    &mkp CUT      &trans
+
+    // Row 2 (Home)
+                  &none         &none         &none         &none         &none            &mkp UNDO     U_MH_LEFT     U_MH_DOWN     U_MH_UP      U_MH_RIGHT
+
+    // Row 3 (Bottom — includes outer pinkies)
+    &trans        &none         &none         &none         &none         &none            &trans       U_MW_LEFT     U_MW_DOWN     U_MW_UP       U_MW_RIGHT     &trans
+
+    // Thumbs (Right hand only, as per Miryoku diagram)
+                                             &none         &none          &none            &mkp MB3       &mkp MB1      &mkp MB2
+  >;
+};

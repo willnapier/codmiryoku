@@ -1,0 +1,3 @@
+// config/boards/shields/totem/totem.keymap
+
+#include "../../../totem.keymap"

@@ -1,0 +1,16 @@
+media_layer {
+  label = "MEDIA";
+  bindings = <
+    // Row 1 (Top)
+                &none         &none         &none         &none         &none             &bootloader   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none
+
+    // Row 2 (Home)
+                &none         &none         &none         &none         &none             &rgb_ug RGB_TOG &rgb_ug RGB_EFF &rgb_ug RGB_HUI &rgb_ug RGB_SAI &rgb_ug RGB_BRI
+
+    // Row 3 (Bottom — includes outer pinkies)
+    &trans      &none         &none         &none         &none         &none             &ext_power EP_TOG  &kp C_PREV  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_NEXT   &trans
+
+    // Thumbs (Right only, left are unused)
+                                            &none         &none           &none             &kp C_STOP    &kp C_PP     &kp C_MUTE
+  >;
+};
