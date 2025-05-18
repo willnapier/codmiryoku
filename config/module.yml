@@ -1,5 +1,9 @@
+# config/module.yml  ← full content
 name: config
+
 build:
   cmake: .
-  kconfig: totem.conf
-  board_root: boards
+  kconfig: totem.conf   # (your existing Kconfig fragment)
+
+boards:
+  - boards              # <─ tells Zephyr “add boards/ to BOARD_ROOT”
