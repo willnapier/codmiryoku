@@ -1,3 +1,2 @@
-zephyr_include_directories(shields)
-
-add_subdirectory(totem)
+add_subdirectory(totem_left)
+add_subdirectory(totem_right)
