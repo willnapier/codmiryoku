@@ -11,13 +11,13 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // Layer definitions
-#define BASE  0
-#define SYM   1
-#define NUM   2
-#define NAV   3
+#define BASE 0
+#define SYM 1
+#define NUM 2
+#define NAV 3
 #define MEDIA 4
 #define MOUSE 5
-#define FUN   6
+#define FUN 6
 
 // Miryoku timeless HRM settings
 #define QUICK_TAP_MS 175
@@ -28,4 +28,82 @@
     quick-tap-ms = <QUICK_TAP_MS>;
     require-prior-idle-ms = <150>;
     hold-trigger-on-release;
+};
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            bindings = 
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  Q       │  W       │  F       │  P       │  B       │   │  J       │  L       │  U       │  Y       │  ' "     │
+            &kp Q      &kp W      &kp F      &kp P      &kp B          &kp J      &kp L      &kp U      &kp Y      &kp SQT
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  A       │  R       │  S       │  T       │  G       │   │  M       │  N       │  E       │  I       │  O       │
+            &kp A      &kp R      &kp S      &kp T      &kp G          &kp M      &kp N      &kp E      &kp I      &kp O
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  Z       │  X       │  C       │  D       │  V       │   │  K       │  H       │ , <      │ . >      │ / ?      │
+            &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      &kp COMMA  &kp DOT    &kp FSLH
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &kp ESC    &kp SPACE      &kp RET    &kp BSPC
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Placeholder layers - will implement these next
+        sym_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+
+        num_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+
+        nav_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+
+        media_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+
+        mouse_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+
+        fun_layer {
+            bindings = 
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                                     &trans &trans    &trans &trans
+            >;
+        };
+    };
 };
