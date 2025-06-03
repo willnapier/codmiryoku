@@ -11,8 +11,8 @@ manifest:
       import: app/west.yml
     - name: totem
       remote: geigeigeist
-      repo-path: TOTEM
-      revision: main
+      repo-path: zmk-config-totem
+      revision: master
       path: totem
   self:
     path: config
