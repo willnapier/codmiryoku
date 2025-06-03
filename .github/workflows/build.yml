@@ -44,13 +44,13 @@ jobs:
       run: west zephyr-export
     
     - name: Build left half
-      run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/totem"
+      run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
     
     - name: Rename left firmware
       run: cp build/zephyr/zmk.uf2 totem_left.uf2
     
     - name: Build right half
-      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/totem"
+      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
     
     - name: Rename right firmware
       run: cp build/zephyr/zmk.uf2 totem_right.uf2
