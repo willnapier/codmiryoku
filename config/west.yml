@@ -2,17 +2,17 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: willnapier
-      url-base: https://github.com/willnapier
-
-  defaults:
-    remote: zmkfirmware
-
+    - name: geigeigeist
+      url-base: https://github.com/GEIGEIGEIST
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-
+    - name: totem
+      remote: geigeigeist
+      repo-path: TOTEM
+      revision: main
+      path: totem
   self:
     path: config
