@@ -14,5 +14,6 @@ manifest:
       repo-path: zmk-config-totem
       revision: master
       path: totem
+      import: true
   self:
     path: config
