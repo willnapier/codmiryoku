@@ -18,6 +18,7 @@
 #define MEDIA 4
 #define MOUSE 5
 #define FUN 6
+#define BUTTON 7
 
 // Miryoku timeless HRM settings
 #define QUICK_TAP_MS 175
@@ -36,10 +37,10 @@
 
         base_layer {
             bindings = <
-                &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &kp SQT
-                &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-    &trans      &kp Z       &kp X       &kp C       &kp D       &kp V           &kp K       &kp H       &kp COMMA   &kp DOT     &kp FSLH    &trans
-                                        &kp ESC     &kp TAB     &kp SPACE       &kp RET     &kp BSPC    &kp DEL
+                &kp Q           &kp W           &kp F           &kp P           &kp B           &kp J           &kp L           &kp U           &kp Y           &kp SQT
+                &mt LCTRL A     &mt LALT R      &mt LGUI S      &mt LSHFT T     &kp G           &kp M           &mt RSHFT N     &mt RGUI E      &mt RALT I      &mt RCTRL O
+    &kp F13     &lt BUTTON Z    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &kp COMMA       &mt RALT DOT    &lt BUTTON FSLH &kp F17
+                                                &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt NUM BSPC    &lt FUN DEL
             >;
         };
 
@@ -94,6 +95,15 @@
                 &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
                                         &trans      &trans      &trans          &trans      &trans      &trans
+            >;
+        };
+
+        button_layer {
+            bindings = <
+                &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &none           &kp RSHFT       &kp RGUI        &kp RALT        &kp RCTRL
+    &trans      &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)       &trans
+                                                &mkp MCLK       &mkp LCLK       &mkp RCLK       &mkp RCLK       &mkp LCLK       &mkp MCLK
             >;
         };
     };
