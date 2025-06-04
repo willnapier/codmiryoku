@@ -46,55 +46,55 @@
 
         sym_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &kp LBRC        &kp AMPS        &kp ASTRK       &kp LPAR        &kp RBRC        &none           &to BASE        &none           &none           &bootloader
+                &kp COLON       &kp DLLR        &kp PRCNT       &kp CARET       &kp PLUS        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
+    &trans      &kp TILDE       &kp EXCL        &kp AT          &kp HASH        &kp PIPE        &none           &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans
+                                                &kp LPAR        &kp RPAR        &kp UNDER       &none           &none           &none
             >;
         };
 
         num_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &kp LBKT        &kp N7          &kp N8          &kp N9          &kp RBKT        &none           &to BASE        &none           &none           &bootloader
+                &kp SEMI        &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
+    &trans      &kp GRAVE       &kp N1          &kp N2          &kp N3          &kp BSLH        &none           &to NUM         &to NAV         &kp RALT        &sys_reset      &trans
+                                                &kp DOT         &kp N0          &kp MINUS       &none           &none           &none
             >;
         };
 
         nav_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
-            >;
+                &bootloader     &to BASE        &to BASE        &to BASE        &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &caps_word      &kp LEFT        &kp DOWN        &kp UP          &kp RIGHT
+    &trans      &sys_reset      &kp RALT        &to NUM         &to NAV         &none           &kp INS         &kp HOME        &kp PG_DN       &kp PG_UP       &kp END         &trans
+                                                &none           &none           &none           &kp RET         &kp BSPC        &kp DEL
+             >;
         };
 
         media_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &bootloader     &to BASE        &none           &none           &none           &none           &none           &none           &none           &none
+                &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &out OUT_TOG    &kp C_PREV      &kp C_VOL_DN    &kp C_VOL_UP    &kp C_NEXT
+    &trans      &sys_reset      &kp RALT        &to FUN         &to MEDIA       &none           &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_CLR      &trans
+                                                &none           &none           &none           &kp C_STOP      &kp C_PP        &kp C_MUTE
             >;
         };
 
         mouse_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &bootloader     &to BASE        &none           &none           &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &none           &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT
+    &trans      &sys_reset      &kp RALT        &to SYM         &to MOUSE       &none           &none           &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT &trans
+                                                &none           &none           &none           &mkp RCLK       &mkp LCLK       &mkp MCLK
             >;
         };
 
         fun_layer {
             bindings = <
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &kp F12         &kp F7          &kp F8          &kp F9          &kp PSCRN       &none           &to BASE        &none           &none           &bootloader
+                &kp F11         &kp F4          &kp F5          &kp F6          &kp SLCK        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
+    &trans      &kp F10         &kp F1          &kp F2          &kp F3          &kp PAUSE_BREAK &none           &to FUN         &to MEDIA       &kp RALT        &sys_reset      &trans
+                                                &kp K_APP       &kp SPACE       &kp TAB         &none           &none           &none
             >;
         };
 
