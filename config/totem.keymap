@@ -34,6 +34,18 @@
     hold-trigger-on-release;
 };
 
+/ {
+    behaviors {
+        td_ctrlz: tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_CTRL_Z";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&kp LC(Z)>;
+        };
+    };
+};
+
 // Configure acceleration behavior (Urob-style)
 &mmv {
     acceleration-exponent = <1>;
@@ -58,7 +70,7 @@
             bindings = <
                 &kp LBRC        &kp AMPS        &kp ASTRK       &kp LPAR        &kp RBRC        &none           &to BASE        &none           &none           &bootloader
                 &kp COLON       &kp DLLR        &kp PRCNT       &kp CARET       &kp PLUS        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
-    &trans      &kp TILDE       &kp EXCL        &kp AT          &kp HASH        &kp PIPE        &none           &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans
+    &trans      &kp TILDE       &kp EXCL        &kp AT          &kp LS(N3)      &kp PIPE        &none           &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans
                                                 &kp LPAR        &kp RPAR        &kp UNDER       &none           &none           &none
             >;
         };
@@ -74,7 +86,7 @@
 
         nav_layer {
             bindings = <
-                &bootloader     &to BASE        &to BASE        &to BASE        &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &bootloader     &to BASE        &to BASE        &to BASE        &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz
                 &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &caps_word      &kp LEFT        &kp DOWN        &kp UP          &kp RIGHT
     &trans      &sys_reset      &kp RALT        &to NUM         &to NAV         &none           &kp INS         &kp HOME        &kp PG_DN       &kp PG_UP       &kp END         &trans
                                                 &none           &none           &none           &kp RET         &kp BSPC        &kp DEL
@@ -92,7 +104,7 @@
 
         mouse_layer {
             bindings = <
-                &bootloader     &to BASE        &none           &none           &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &bootloader     &to BASE        &none           &none           &none           &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz
                 &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &none           &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT
     &trans      &sys_reset      &kp RALT        &to SYM         &to MOUSE       &none           &none           &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT &trans
                                                 &none           &none           &none           &mkp RCLK       &mkp LCLK       &mkp MCLK
@@ -110,9 +122,9 @@
 
         button_layer {
             bindings = <
-                &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)
+                &td_ctrlz       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz
                 &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &none           &kp RSHFT       &kp RGUI        &kp RALT        &kp RCTRL
-    &trans      &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &kp LC(Z)       &trans
+    &trans      &td_ctrlz       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz       &trans
                                                 &mkp MCLK       &mkp LCLK       &mkp RCLK       &mkp RCLK       &mkp LCLK       &mkp MCLK
             >;
         };
