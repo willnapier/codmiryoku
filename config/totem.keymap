@@ -62,8 +62,8 @@
             bindings = <
                 &kp Q           &kp W           &kp F           &kp P           &kp B           &kp J           &kp L           &kp U           &kp Y           &kp SQT
                 &mt LCTRL A     &mt LALT R      &mt LGUI S      &mt LSHFT T     &kp G           &kp M           &mt RSHFT N     &mt RGUI E      &mt RALT I      &mt RCTRL O
-    &kp F13     &lt BUTTON Z    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &kp COMMA       &mt RALT DOT    &lt BUTTON FSLH &kp F17
-                                                &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt NUM BSPC    &lt FUN DEL
+    &kp F13     &lt BUTTON Z    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &kp COMMA       &mt RALT DOT    &lt BUTTON FSLH &kp ESC
+                                                &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt NUM BSPC    &lt FUN ESC
             >;
         };
 
@@ -81,7 +81,7 @@
                 &kp LBKT        &kp N7          &kp N8          &kp N9          &kp RBKT        &none           &to BASE        &none           &none           &bootloader
                 &kp SEMI        &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
     &trans      &kp GRAVE       &kp N1          &kp N2          &kp N3          &kp BSLH        &none           &to NUM         &to NAV         &kp RALT        &sys_reset      &trans
-                                                &kp DOT         &kp N0          &kp MINUS       &none           &none           &none
+                                                &kp DOT         &kp N0          &kp MINUS       &none           &none           &kp DEL
             >;
         };
 
