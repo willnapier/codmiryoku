@@ -25,7 +25,6 @@
 #define MEDIA 4
 #define MOUSE 5
 #define FUN 6
-#define BUTTON 7
 
 // Miryoku timeless HRM settings
 #define QUICK_TAP_MS 175
@@ -46,15 +45,6 @@
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&none>, <&kp LG(Z)>;  // LG = Left GUI (Cmd on macOS)
-        };
-
-        // Retained from the original Totem keymap so button_layer still resolves.
-        td_ctrlz: tap_dance {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TAP_DANCE_CTRL_Z";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&none>, <&kp LC(Z)>;
         };
 
         // Make Left-Ctrl+Z a hard no-op at the keyboard.
@@ -389,13 +379,5 @@
             >;
         };
 
-        button_layer {
-            bindings = <
-                &td_ctrlz       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz
-                &kp LCTRL       &kp LALT        &kp LGUI        &kp LSHFT       &none           &none           &kp RSHFT       &kp RGUI        &kp RALT        &kp RCTRL
-                &trans          &td_ctrlz       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(Y)       &kp LC(Y)       &kp LC(V)       &kp LC(C)       &kp LC(X)       &td_ctrlz       &trans
-                                                &mkp MCLK       &mkp LCLK       &mkp RCLK       &mkp RCLK       &mkp LCLK       &mkp MCLK
-            >;
-        };
     };
 };
