@@ -291,6 +291,28 @@
             layers = <BASE>;
         };
 
+        // One-shot capital combos (experimental, 2026-06-30): tap both keys to
+        // arm a sticky Shift for the next letter only. Emits Shift alone (no
+        // Cmd), so there is no clash with Cmd+Shift app shortcuts. The idle +
+        // tight-timeout guard stops them firing during normal typing rolls
+        // (e.g. "st"/"ne"); capitals fall after a space (a pause), which is
+        // exactly when the combo is permitted to fire. Totem 38-key positions.
+        combo_shift_left {
+            timeout-ms = <40>;
+            require-prior-idle-ms = <200>;
+            key-positions = <12 13>;  // S + T  ->  sticky LSHIFT
+            bindings = <&sk LSHFT>;
+            layers = <BASE>;
+        };
+
+        combo_shift_right {
+            timeout-ms = <40>;
+            require-prior-idle-ms = <200>;
+            key-positions = <16 17>;  // N + E  ->  sticky RSHIFT
+            bindings = <&sk RSHFT>;
+            layers = <BASE>;
+        };
+
     };
 };
 
