@@ -408,7 +408,7 @@
 
         fun_layer {
             bindings = <
-                &kp F12         &kp F7          &kp F8          &kp F9          &kp PSCRN       &none           &to BASE        &none           &none           &bootloader
+                &kp LPAR        &kp F7          &kp F8          &kp F9          &kp RPAR        &none           &to BASE        &kp F12         &none           &bootloader
                 &kp F11         &kp F4          &kp F5          &kp F6          &kp SLCK        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
                 &trans          &kp F10         &kp F1          &kp F2          &kp F3          &kp PAUSE_BREAK &none           &to FUN         &to MEDIA       &kp RALT        &sys_reset      &trans
                                                 &kp K_APP       &kp SPACE       &kp TAB         &none           &none           &none
