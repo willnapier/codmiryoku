@@ -368,7 +368,7 @@
 
         num_layer {
             bindings = <
-                &kp LBKT        &kp N7          &kp N8          &kp N9          &kp RBKT        &none           &browser_back   &browser_forward &none          &bootloader
+                &kp LPAR        &kp N7          &kp N8          &kp N9          &kp RPAR        &none           &browser_back   &browser_forward &none          &bootloader
                 &kp GRAVE       &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
                 &trans          &kp TILDE       &kp N1          &kp N2          &kp N3          &kp PIPE        &kp STAR        &to BASE         &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
                                                 &none           &kp N0          &none           &none           &none           &kp DEL
@@ -408,7 +408,7 @@
 
         fun_layer {
             bindings = <
-                &kp LPAR        &kp F7          &kp F8          &kp F9          &kp RPAR        &none           &to BASE        &kp F12         &none           &bootloader
+                &kp LBKT        &kp F7          &kp F8          &kp F9          &kp RBKT        &none           &to BASE        &kp F12         &none           &bootloader
                 &kp F11         &kp F4          &kp F5          &kp F6          &kp SLCK        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
                 &trans          &kp F10         &kp F1          &kp F2          &kp F3          &kp PAUSE_BREAK &none           &to FUN         &to MEDIA       &kp RALT        &sys_reset      &trans
                                                 &kp K_APP       &kp SPACE       &kp TAB         &none           &none           &none
