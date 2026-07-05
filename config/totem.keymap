@@ -39,6 +39,19 @@
 
 / {
     behaviors {
+        // Layer-tap + quick-tap: tap-then-hold the SAME key repeats the tap
+        // (e.g. backspace autorepeat past the HRM), while hold-from-idle still
+        // enters the layer. Matches ZMK's default &lt (tap-preferred, 200ms) and
+        // only adds QUICK_TAP_MS quick-tap. Used on the &lt_repeat NUM BSPC thumb.
+        lt_repeat: layer_tap_repeat {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            bindings = <&mo>, <&kp>;
+        };
+
         // macOS-SPECIFIC: Cmd+Z for undo (instead of Ctrl+Z)
         td_cmdz: tap_dance {
             compatible = "zmk,behavior-tap-dance";
@@ -339,7 +352,7 @@
                 &kp Q           &kp W           &kp F           &kp P           &kp B           &kp J           &kp L           &kp U           &kp Y           &kp SQT
                 &hml LCTRL A    &hml LALT R     &hml LGUI S     &hml_shift LSHFT T     &kp G    &kp M           &hmr_shift RSHFT N     &hmr_cmd RGUI E  &mt RALT I      &mt RCTRL O
                 &smart_shift_left &z_no_ctrl    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &kp COMMA       &mt RALT DOT    &slash_morph    &smart_shift_right
-                                                &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt NUM BSPC    &lt FUN ESC
+                                                &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt_repeat NUM BSPC    &lt FUN ESC
             >;
         };
 
