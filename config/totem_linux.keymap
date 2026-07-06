@@ -313,6 +313,41 @@
             layers = <BASE>;
         };
 
+        // --- Browser-nav combos on W+F / F+P (freed from the old bracket combos).
+        //     BASE = history back/forward; NAV layer = previous/next tab.
+        //     Linux (Chrome): history Alt+Left / Alt+Right ; tabs Ctrl+PgUp / Ctrl+PgDn.
+        //     Per-OS twin of the macOS keymap (Cmd+[/] , Cmd+{/}). A parallel history
+        //     nav also lives on NUM+L/U (browser_back/forward — still on the wrong
+        //     Ctrl+[ on this keymap; flagged separately).
+        combo_hist_back {   // W + F  (BASE) = history back  (Alt+Left)
+            timeout-ms = <50>;
+            require-prior-idle-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp LA(LEFT)>;
+            layers = <BASE>;
+        };
+        combo_hist_fwd {   // F + P  (BASE) = history forward  (Alt+Right)
+            timeout-ms = <50>;
+            require-prior-idle-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&kp LA(RIGHT)>;
+            layers = <BASE>;
+        };
+        // NAV tab combos: no require-prior-idle — NAV-scoped, and the layer-thumb
+        // press would otherwise reset the idle timer and swallow the first combo.
+        combo_tab_prev {   // W + F  (NAV) = previous tab  (Ctrl+PgUp)
+            timeout-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp LC(PG_UP)>;
+            layers = <NAV>;
+        };
+        combo_tab_next {   // F + P  (NAV) = next tab  (Ctrl+PgDn)
+            timeout-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&kp LC(PG_DN)>;
+            layers = <NAV>;
+        };
+
         combo_at {
             timeout-ms = <50>;
             require-prior-idle-ms = <150>;

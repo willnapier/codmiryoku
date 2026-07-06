@@ -299,6 +299,40 @@
             layers = <BASE>;
         };
 
+        // --- Browser-nav combos on W+F / F+P (freed from the old bracket combos).
+        //     BASE = history back/forward; NAV layer = previous/next tab.
+        //     Mac (Chrome): history Cmd+[ / Cmd+] ; tabs Cmd+{ / Cmd+} (same keycodes
+        //     as the existing sym+cmd+q/b). A parallel history nav also lives on
+        //     NUM+L/U (browser_back/forward). Linux twin = Alt+arrows / Ctrl+PgUp-Dn.
+        combo_hist_back {   // W + F  (BASE) = history back  (Cmd+[)
+            timeout-ms = <50>;
+            require-prior-idle-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp LG(LBKT)>;
+            layers = <BASE>;
+        };
+        combo_hist_fwd {   // F + P  (BASE) = history forward  (Cmd+])
+            timeout-ms = <50>;
+            require-prior-idle-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&kp LG(RBKT)>;
+            layers = <BASE>;
+        };
+        // NAV tab combos: no require-prior-idle — NAV-scoped, and the layer-thumb
+        // press would otherwise reset the idle timer and swallow the first combo.
+        combo_tab_prev {   // W + F  (NAV) = previous tab  (Cmd+{)
+            timeout-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp LG(LBRC)>;
+            layers = <NAV>;
+        };
+        combo_tab_next {   // F + P  (NAV) = next tab  (Cmd+})
+            timeout-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&kp LG(RBRC)>;
+            layers = <NAV>;
+        };
+
         combo_at {
             timeout-ms = <50>;
             require-prior-idle-ms = <150>;
