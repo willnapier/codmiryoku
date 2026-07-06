@@ -243,11 +243,11 @@
             layers = <BASE>;
         };
 
-        // U + Y = - (minus/hyphen)
+        // G + M = - (minus/hyphen) — moved off U+Y (now bracket-combo keys)
         combo_minus {
             timeout-ms = <70>;
             require-prior-idle-ms = <75>;
-            key-positions = <7 8>;
+            key-positions = <14 15>;
             bindings = <&kp MINUS>;
             layers = <BASE>;
         };
@@ -269,20 +269,47 @@
             layers = <BASE>;
         };
 
-        // Symbol combos
-        combo_bracket_left {
-            timeout-ms = <50>;
-            require-prior-idle-ms = <150>;
-            key-positions = <1 2>;  // W + F
-            bindings = <&bracket_left>;
+        // --- Bracket combos: vertical, same-finger, mirrored (L=open / R=close).
+        //     Strongest finger = most common bracket: index=(), middle=[], ring={}.
+        //     No require-prior-idle: a same-finger flatten can't occur within the
+        //     40ms window during normal sequential typing, and an idle guard would
+        //     block brackets typed right after a letter (foo(, [text](url)).
+        //     Overlaps shift keys S/T/N/E by design — the tight window keeps the
+        //     deliberate flatten distinct from a two-finger shift press.
+        combo_lparen {   // ( = P + T  (left index)
+            timeout-ms = <40>;
+            key-positions = <3 13>;
+            bindings = <&kp LPAR>;
             layers = <BASE>;
         };
-
-        combo_bracket_right {
-            timeout-ms = <50>;
-            require-prior-idle-ms = <150>;
-            key-positions = <2 3>;  // F + P
-            bindings = <&bracket_right>;
+        combo_rparen {   // ) = L + N  (right index)
+            timeout-ms = <40>;
+            key-positions = <6 16>;
+            bindings = <&kp RPAR>;
+            layers = <BASE>;
+        };
+        combo_lbracket {   // [ = F + S  (left middle)
+            timeout-ms = <40>;
+            key-positions = <2 12>;
+            bindings = <&kp LBKT>;
+            layers = <BASE>;
+        };
+        combo_rbracket {   // ] = U + E  (right middle)
+            timeout-ms = <40>;
+            key-positions = <7 17>;
+            bindings = <&kp RBKT>;
+            layers = <BASE>;
+        };
+        combo_lbrace {   // { = W + R  (left ring)
+            timeout-ms = <40>;
+            key-positions = <1 11>;
+            bindings = <&kp LBRC>;
+            layers = <BASE>;
+        };
+        combo_rbrace {   // } = Y + I  (right ring)
+            timeout-ms = <40>;
+            key-positions = <8 18>;
+            bindings = <&kp RBRC>;
             layers = <BASE>;
         };
 
