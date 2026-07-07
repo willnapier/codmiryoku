@@ -139,14 +139,14 @@
         browser_back: browser_back_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LC(LBKT)>, <&kp LC(LS(LBKT))>;   // Cmd+[ normal, Cmd+Shift+[ shifted (previous tab)
+            bindings = <&kp LA(LEFT)>, <&kp LC(PG_UP)>;   // Linux: Alt+Left = back ; Shift = Ctrl+PgUp = prev tab
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         browser_forward: browser_forward_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LC(RBKT)>, <&kp LC(LS(RBKT))>;   // Cmd+] normal, Cmd+Shift+] shifted (next tab)
+            bindings = <&kp LA(RIGHT)>, <&kp LC(PG_DN)>;   // Linux: Alt+Right = forward ; Shift = Ctrl+PgDn = next tab
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -243,11 +243,11 @@
             layers = <BASE>;
         };
 
-        // G + M = - (minus/hyphen) — moved off U+Y (now bracket-combo keys)
+        // F + P = - (minus/hyphen) — home freed by moving forward-history to U+Y
         combo_minus {
             timeout-ms = <70>;
             require-prior-idle-ms = <75>;
-            key-positions = <14 15>;
+            key-positions = <2 3>;
             bindings = <&kp MINUS>;
             layers = <BASE>;
         };
@@ -313,39 +313,23 @@
             layers = <BASE>;
         };
 
-        // --- Browser-nav combos on W+F / F+P (freed from the old bracket combos).
-        //     BASE = history back/forward; NAV layer = previous/next tab.
-        //     Linux (Chrome): history Alt+Left / Alt+Right ; tabs Ctrl+PgUp / Ctrl+PgDn.
-        //     Per-OS twin of the macOS keymap (Cmd+[/] , Cmd+{/}). A parallel history
-        //     nav also lives on NUM+L/U (browser_back/forward — still on the wrong
-        //     Ctrl+[ on this keymap; flagged separately).
-        combo_hist_back {   // W + F  (BASE) = history back  (Alt+Left)
+        // --- Browser-nav combos (mirrored): W+F = back (shift = prev tab),
+        //     U+Y = forward (shift = next tab), via the browser_back/forward
+        //     mod-morphs (tap = history, shift = tab). Left hand = back, right = forward.
+        //     Per-OS inside the morphs: Mac Cmd+[/] · Cmd+{/} ; Linux Alt+←/→ · Ctrl+PgUp/Dn.
+        combo_browser_back {   // W + F = back / shift = previous tab
             timeout-ms = <50>;
             require-prior-idle-ms = <50>;
             key-positions = <1 2>;
-            bindings = <&kp LA(LEFT)>;
+            bindings = <&browser_back>;
             layers = <BASE>;
         };
-        combo_hist_fwd {   // F + P  (BASE) = history forward  (Alt+Right)
+        combo_browser_fwd {   // U + Y = forward / shift = next tab
             timeout-ms = <50>;
             require-prior-idle-ms = <50>;
-            key-positions = <2 3>;
-            bindings = <&kp LA(RIGHT)>;
+            key-positions = <7 8>;
+            bindings = <&browser_forward>;
             layers = <BASE>;
-        };
-        // NAV tab combos: no require-prior-idle — NAV-scoped, and the layer-thumb
-        // press would otherwise reset the idle timer and swallow the first combo.
-        combo_tab_prev {   // W + F  (NAV) = previous tab  (Ctrl+PgUp)
-            timeout-ms = <50>;
-            key-positions = <1 2>;
-            bindings = <&kp LC(PG_UP)>;
-            layers = <NAV>;
-        };
-        combo_tab_next {   // F + P  (NAV) = next tab  (Ctrl+PgDn)
-            timeout-ms = <50>;
-            key-positions = <2 3>;
-            bindings = <&kp LC(PG_DN)>;
-            layers = <NAV>;
         };
 
         combo_at {
@@ -443,7 +427,7 @@
 
         num_layer {
             bindings = <
-                &kp LPAR        &kp N7          &kp N8          &kp N9          &kp RPAR        &none           &browser_back   &browser_forward &none          &bootloader
+                &kp LPAR        &kp N7          &kp N8          &kp N9          &kp RPAR        &none           &none           &none            &none          &bootloader
                 &kp GRAVE       &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
                 &trans          &kp TILDE       &kp N1          &kp N2          &kp N3          &kp PIPE        &kp STAR        &to BASE         &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
                                                 &none           &kp N0          &none           &none           &none           &kp DEL
