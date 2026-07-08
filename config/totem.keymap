@@ -229,11 +229,11 @@
             layers = <BASE>;
         };
 
-        // F + P = - (minus/hyphen) — home freed by moving forward-history to U+Y
+        // U + Y = - (minus/hyphen) — Will's preferred right-hand home
         combo_minus {
             timeout-ms = <70>;
             require-prior-idle-ms = <75>;
-            key-positions = <2 3>;
+            key-positions = <7 8>;
             bindings = <&kp MINUS>;
             layers = <BASE>;
         };
@@ -299,23 +299,24 @@
             layers = <BASE>;
         };
 
-        // --- Browser-nav combos (mirrored): W+F = back (shift = prev tab),
-        //     U+Y = forward (shift = next tab), via the browser_back/forward
-        //     mod-morphs (tap = history, shift = tab). Left hand = back, right = forward.
-        //     Per-OS inside the morphs: Mac Cmd+[/] · Cmd+{/} ; Linux Alt+←/→ · Ctrl+PgUp/Dn.
-        combo_browser_back {   // W + F = back / shift = previous tab
-            timeout-ms = <50>;
-            require-prior-idle-ms = <50>;
-            key-positions = <1 2>;
+        // --- Browser-nav combos on the NAV layer (base freed; hyphen reclaims U+Y).
+        //     Both on the RIGHT hand around the U pivot so reversing tab direction is a
+        //     finger-shift, not a hand-swap: L+U = back/left, U+Y = forward/right.
+        //     tap = history, shift = tab (NAV-layer T is LSHFT — hold it for tabs).
+        //     Via browser_back/forward morphs: Mac Cmd+[/]·Cmd+{/} ; Linux Alt+←/→·Ctrl+PgUp/Dn.
+        //     NB overlaps the NAV clipboard singles (L=paste, U=copy, Y=cut) — watch a
+        //     fast copy→paste roll; the tight timeout guards it.
+        combo_browser_back {   // NAV: L + U = back / shift = previous tab
+            timeout-ms = <45>;
+            key-positions = <6 7>;
             bindings = <&browser_back>;
-            layers = <BASE>;
+            layers = <NAV>;
         };
-        combo_browser_fwd {   // U + Y = forward / shift = next tab
-            timeout-ms = <50>;
-            require-prior-idle-ms = <50>;
+        combo_browser_fwd {   // NAV: U + Y = forward / shift = next tab
+            timeout-ms = <45>;
             key-positions = <7 8>;
             bindings = <&browser_forward>;
-            layers = <BASE>;
+            layers = <NAV>;
         };
 
         combo_at {
