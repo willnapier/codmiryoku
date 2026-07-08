@@ -430,7 +430,7 @@
             bindings = <
                 &kp LPAR        &kp N7          &kp N8          &kp N9          &kp RPAR        &none           &none           &none            &none          &bootloader
                 &kp GRAVE       &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
-                &trans          &kp TILDE       &kp N1          &kp N2          &kp N3          &kp PIPE        &kp STAR        &to BASE         &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
+                &trans          &kp TILDE       &kp N1          &kp N2          &kp N3          &kp PIPE        &kp STAR        &kp EQUAL        &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
                                                 &none           &kp N0          &none           &none           &none           &kp DEL
             >;
         };
