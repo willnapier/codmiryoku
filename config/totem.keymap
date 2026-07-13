@@ -264,12 +264,15 @@
         };
 
         // --- Bracket combos: vertical, same-finger, mirrored (L=open / R=close).
-        //     Strongest finger = most common bracket: index=(), middle=[], ring={}.
+        //     Strongest finger = most common bracket: index=(), middle=[], ring={},
+        //     pinky=<> (weaker; Totem splay + small wrist/ring assist is fine).
         //     No require-prior-idle: a same-finger flatten can't occur within the
         //     40ms window during normal sequential typing, and an idle guard would
         //     block brackets typed right after a letter (foo(, [text](url)).
         //     Overlaps shift keys S/T/N/E by design — the tight window keeps the
         //     deliberate flatten distinct from a two-finger shift press.
+        //     Pinky pairs overlap HRM Ctrl on A/O: hold-mod then letter is fine;
+        //     simultaneous mash within 40ms can emit <> instead of Ctrl+letter.
         combo_lparen {   // ( = P + T  (left index)
             timeout-ms = <40>;
             key-positions = <3 13>;
@@ -304,6 +307,18 @@
             timeout-ms = <40>;
             key-positions = <8 18>;
             bindings = <&kp RBRC>;
+            layers = <BASE>;
+        };
+        combo_langle {   // < = Q + A  (left pinky column)
+            timeout-ms = <40>;
+            key-positions = <0 10>;
+            bindings = <&kp LESS_THAN>;
+            layers = <BASE>;
+        };
+        combo_rangle {   // > = ' + O  (right pinky column)
+            timeout-ms = <40>;
+            key-positions = <9 19>;
+            bindings = <&kp GREATER_THAN>;
             layers = <BASE>;
         };
 
