@@ -232,12 +232,14 @@
         };
 
         // U + Y = - (minus/hyphen) — Will's preferred right-hand home
-        // Asymmetric vs colon (50/150): hyphen is often mid-stream (foo-bar) with a
-        // short gap — 200ms prior-idle made intentional - emit uy instead. Still
-        // much stricter than old 70/75 that ghosted buy/guy (road-test 2026-07-13).
+        // Asymmetric vs colon: hyphen is mid-stream (a-b, foo-bar). Prior-idle must
+        // stay short or intentional chords after a letter emit uy. Buy/guy protection
+        // comes mainly from a TIGHT mash window (40ms) — sequential u→y in "buy"
+        // rarely overlaps both keys that hard; old ghosts were from timeout 70ms.
+        // (Road-test: 50/150 still too idle-heavy for a-b → try 40/50.)
         combo_minus {
-            timeout-ms = <50>;
-            require-prior-idle-ms = <150>;
+            timeout-ms = <40>;
+            require-prior-idle-ms = <50>;
             key-positions = <7 8>;
             bindings = <&kp MINUS>;
             layers = <BASE>;
