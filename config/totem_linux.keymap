@@ -235,9 +235,8 @@
         compatible = "zmk,combos";
 
         // L + U = : (colon) / ; (semicolon when shifted)
-        // Guards 40/200 — same policy as sticky S+T / N+E: deliberate chord after a
-        // real pause only. Combo already enforces intention; matching st/ne stops
-        // mid-word lu/ul and post-pause buy/guy false triggers (road-test 2026-07-13).
+        // Guards 40/200 — pause-chord like sticky S+T / N+E. Colon usually follows
+        // a real pause; tight window keeps mid-word lu/ul clean.
         combo_colon {
             timeout-ms = <40>;
             require-prior-idle-ms = <200>;
@@ -247,11 +246,12 @@
         };
 
         // U + Y = - (minus/hyphen) — Will's preferred right-hand home
-        // Same 40/200 as colon and sticky Shift. Hyphen-as-combo already wants a
-        // slight pause; loose windows only created roll→hyphen ghosts.
+        // Asymmetric vs colon (50/150): hyphen is often mid-stream (foo-bar) with a
+        // short gap — 200ms prior-idle made intentional - emit uy instead. Still
+        // much stricter than old 70/75 that ghosted buy/guy (road-test 2026-07-13).
         combo_minus {
-            timeout-ms = <40>;
-            require-prior-idle-ms = <200>;
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
             key-positions = <7 8>;
             bindings = <&kp MINUS>;
             layers = <BASE>;
