@@ -235,11 +235,12 @@
         compatible = "zmk,combos";
 
         // L + U = : (colon) / ; (semicolon when shifted)
-        // Guards 40/200 — pause-chord like sticky S+T / N+E. Colon usually follows
-        // a real pause; tight window keeps mid-word lu/ul clean.
+        // 50/100 — pre-experiment baseline (Will: 40/200 made : an issue he did not
+        // remember noticing before). Not as idle-strict as sticky Shift; not as
+        // mid-stream-open as hyphen 40/50. Asymmetric on purpose.
         combo_colon {
-            timeout-ms = <40>;
-            require-prior-idle-ms = <200>;
+            timeout-ms = <50>;
+            require-prior-idle-ms = <100>;
             key-positions = <6 7>;
             bindings = <&colon_semi>;
             layers = <BASE>;
