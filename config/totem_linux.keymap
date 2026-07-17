@@ -6,6 +6,7 @@
  * LINUX-SPECIFIC TOTEM KEYMAP (Ctrl edit commands)
  * Ported from piantor_pro_bt.keymap (42-key) to Totem (38-key); the Linux twin of totem.keymap (macOS).
  * British Pound (£) on SYM+D, Hash (#) on Right-Alt+3
+ * Euro (€) on SYM+P — euro_macro compose sequence (Menu, c, =) via ~/.XCompose
  */
 
 #include <behaviors.dtsi>
@@ -47,6 +48,16 @@
             wait-ms = <30>;
             tap-ms = <30>;
             bindings = <&kp K_APP>, <&kp L>, <&kp MINUS>;
+        };
+
+        // Euro (€) via compose sequence (Menu, c, =) — in the default X Compose file
+        // (/usr/share/X11/locale/en_US.UTF-8/Compose: <Multi_key> <c> <equal>).
+        euro_macro: euro_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&kp K_APP>, <&kp C>, <&kp EQUAL>;
         };
     };
 };
@@ -458,7 +469,7 @@
 
         sym_layer {
             bindings = <
-                &kp LBRC        &kp AMPS        &kp ASTRK       &kp LPAR        &kp RBRC        &none           &to BASE        &none           &none           &bootloader
+                &kp LBRC        &kp AMPS        &kp ASTRK       &euro_macro     &kp RBRC        &none           &to BASE        &none           &none           &bootloader
                 &kp SEMI        &kp DLLR        &kp PRCNT       &kp CARET       &kp PLUS        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
                 &kp TILDE       &kp EXCL        &kp AT          &kp LS(N3)      &kp PIPE        &none           &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans          &trans
                                                 &none           &none           &none           &none           &none           &none
