@@ -141,11 +141,25 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        // Colon / semicolon on same key
-        colon_semi: colon_semi_morph {
+        // Urob-style punctuation morphs (2026-07-18): colon/semicolon live on
+        // Shift+, / Shift+. — not on letter combos (avoids ul/lu digraph traps).
+        // sticky Shift (outer pinkies) or hold-T/N then , or .  →  ; or :
+        // <> stay on vertical combos Q+A / '+O (Urob puts them on nested
+        // Ctrl+Shift of these morphs; we keep the same-finger vertical path).
+        comma_semi: comma_semi_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp COLON>, <&kp SEMI>;   // Normal = : vs Shift = ;
+            bindings = <&kp COMMA>, <&kp SEMI>;   // ,  /  Shift → ;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Period: plain . / Shift → :  (RAlt-hold removed 2026-07-19).
+        // RAlt remains on hold-X and hold-I (and layers). Option/AltGr symbol
+        // discovery is fine; regular maths/programming → a dedicated layer later.
+        dot_colon: dot_colon_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOT>, <&kp COLON>;    // .  /  Shift → :
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -256,28 +270,18 @@
     combos {
         compatible = "zmk,combos";
 
-        // L + U = : (colon) / ; (semicolon when shifted)
-        // 50/100 — pre-experiment baseline (Will: 40/200 made : an issue he did not
-        // remember noticing before). Not as idle-strict as sticky Shift; not as
-        // mid-stream-open as hyphen 40/50. Asymmetric on purpose.
-        combo_colon {
-            timeout-ms = <50>;
-            require-prior-idle-ms = <100>;
-            key-positions = <6 7>;
-            bindings = <&colon_semi>;
-            layers = <BASE>;
-        };
+        // Letter combos for :/; abandoned 2026-07-18 (L+U digraph trap; J+L /
+        // P+B drafted then dropped as awkward). Colon/semi = Shift+. / Shift+,
+        // via comma_semi / dot_colon morphs (Urob path). <> remain Q+A / '+O.
 
-        // U + Y = - (minus/hyphen) — Will's preferred right-hand home
-        // Asymmetric vs colon: hyphen is mid-stream (a-b, foo-bar). Prior-idle must
-        // stay short or intentional chords after a letter emit uy. Buy/guy protection
-        // comes mainly from a TIGHT mash window (40ms) — sequential u→y in "buy"
-        // rarely overlaps both keys that hard; old ghosts were from timeout 70ms.
-        // (Road-test: 50/150 still too idle-heavy for a-b → try 40/50.)
+        // N + H = - (minus/hyphen) — vertical home+bottom (Urob-style), 2026-07-19.
+        // Replaces horizontal U+Y which still false-fired on uy/yu rolls (buy/guy).
+        // Same-finger flatten: no English digraph path. No prior-idle so mid-stream
+        // a-b / foo-bar still works (matches bracket verticals). U+Y freed on BASE;
+        // NAV still uses U+Y for browser-forward.
         combo_minus {
             timeout-ms = <40>;
-            require-prior-idle-ms = <50>;
-            key-positions = <7 8>;
+            key-positions = <16 27>;  // N + H
             bindings = <&kp MINUS>;
             layers = <BASE>;
         };
@@ -426,27 +430,10 @@
             layers = <BASE>;
         };
 
-        // One-shot capital combos (experimental, 2026-06-30): tap both keys to
-        // arm a sticky Shift for the next letter only. Emits Shift alone (no
-        // Ctrl/Cmd), so no clash with modified app shortcuts. The idle +
-        // tight-timeout guard stops them firing during normal typing rolls
-        // (e.g. "st"/"ne"); capitals fall after a space (a pause), which is
-        // exactly when the combo is permitted to fire. Totem 38-key positions.
-        combo_shift_left {
-            timeout-ms = <40>;
-            require-prior-idle-ms = <200>;
-            key-positions = <12 13>;  // S + T  ->  sticky LSHIFT
-            bindings = <&sk LSHFT>;
-            layers = <BASE>;
-        };
-
-        combo_shift_right {
-            timeout-ms = <40>;
-            require-prior-idle-ms = <200>;
-            key-positions = <16 17>;  // N + E  ->  sticky RSHIFT
-            bindings = <&sk RSHFT>;
-            layers = <BASE>;
-        };
+        // S+T / N+E one-shot sticky Shift removed 2026-07-18.
+        // Digraphs st/ne after pauses (new, next, start…) satisfied prior-idle
+        // and fired the combo (e.g. "new" → "W"). Capitals: hold-T/N HRM,
+        // outer smart sticky Shift, or NAV caps_word.
 
     };
 };
@@ -473,7 +460,7 @@
             bindings = <
                 &kp Q           &kp W           &kp F           &kp P           &kp B           &kp J           &kp L           &kp U           &kp Y           &kp SQT
                 &hml LCTRL A    &hml LALT R     &hml LGUI S     &hml_shift LSHFT T     &kp G    &kp M           &hmr_shift RSHFT N     &hmr_cmd RGUI E  &mt RALT I      &mt RCTRL O
-                &smart_shift_left &z_no_ctrl    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &kp COMMA       &mt RALT DOT    &slash_morph    &smart_shift_right
+                &smart_shift_left &z_no_ctrl    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &comma_semi     &dot_colon      &slash_morph    &smart_shift_right
                                                 &lt MEDIA ESC   &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt_repeat NUM BSPC    &lt FUN ESC
             >;
         };
