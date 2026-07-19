@@ -92,16 +92,14 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        // Outer thumbs (2026-07-19 experiment): dual Shift like pinkies, but NO
-        // paren morphs — tap = sticky Shift, hold = held Shift. Esc → Q+W combo;
-        // MEDIA/FUN → xcd / h,. bars.
+        // hold = LSHFT, tap = sticky LSHFT — use as &thumb_shift LSHFT LSHFT
         thumb_shift: thumb_dual_shift {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <QUICK_TAP_MS>;
-            bindings = <&kp LSHFT>, <&sk LSHFT>;
+            bindings = <&kp>, <&sk>;
         };
 
         // Forward slash / backslash on same key
@@ -465,7 +463,7 @@
                 &kp Q           &kp W           &kp F           &kp P           &kp B           &kp J           &kp L           &kp U           &kp Y           &kp SQT
                 &hml LCTRL A    &hml LALT R     &hml LGUI S     &hml_shift LSHFT T     &kp G    &kp M           &hmr_shift RSHFT N     &hmr_cmd RGUI E  &mt RALT I      &mt RCTRL O
                 &smart_shift_left &z_no_ctrl    &mt RALT X      &kp C           &kp D           &kp V           &kp K           &kp H           &comma_semi     &dot_colon      &slash_morph    &smart_shift_right
-                                                &thumb_shift    &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt_repeat NUM BSPC    &thumb_shift
+                                                &thumb_shift LSHFT LSHFT    &lt NAV SPACE   &lt MOUSE TAB   &lt SYM RET     &lt_repeat NUM BSPC    &thumb_shift LSHFT LSHFT
             >;
         };
 
