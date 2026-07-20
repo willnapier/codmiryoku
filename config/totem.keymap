@@ -263,6 +263,21 @@
             layers = <BASE>;
         };
 
+        // Vertical ; / : (2026-07-20) — home+bottom, same-finger; no Shift needed.
+        // Complements Urob Shift+,/. morphs (kept as backup). Totem 38 positions.
+        combo_semicolon {
+            timeout-ms = <40>;
+            key-positions = <17 28>;  // E + ,
+            bindings = <&kp SEMI>;
+            layers = <BASE>;
+        };
+        combo_colon {
+            timeout-ms = <40>;
+            key-positions = <18 29>;  // I + .
+            bindings = <&kp COLON>;
+            layers = <BASE>;
+        };
+
         // , + . = ? (question mark) / ! (exclamation when shifted)
         combo_question {
             timeout-ms = <50>;
