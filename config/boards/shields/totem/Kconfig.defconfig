@@ -3,7 +3,8 @@
 
 if SHIELD_TOTEM_LEFT
 
-# Default only; CI overrides via EXTRA_CONF_FILE → "Totem Mac" / "Totem Linux"
+# Default only; CI overrides via EXTRA_CONF_FILE:
+#   Totem-Mac-1 / Totem-Mac-2 / Totem-Linux-1 / Totem-Linux-2
 config ZMK_KEYBOARD_NAME
     default "TOTEM"
     

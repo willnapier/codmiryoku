@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    
+
     - name: Cache west modules
       uses: actions/cache@v4
       env:
@@ -33,61 +33,108 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    
+
     - name: West Init
       run: west init -l config
-    
+
     - name: West Update
       run: west update
-    
+
     - name: West Zephyr export
       run: west zephyr-export
-    
-    # ---- macOS/Cmd variant (default keymap: config/totem.keymap) ----
-    # EXTRA_CONF_FILE sets BLE name "Totem Mac" (vs "Totem Linux") on central.
-    - name: Build left half (macOS)
-      run: >
-        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
-        -DSHIELD=totem_left
-        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_macos.conf"
-    - name: Rename left firmware (macOS)
-      run: cp build/zephyr/zmk.uf2 totem_macos_left.uf2
-    - name: Build right half (macOS)
-      run: >
-        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
-        -DSHIELD=totem_right
-        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_macos.conf"
-    - name: Rename right firmware (macOS)
-      run: cp build/zephyr/zmk.uf2 totem_macos_right.uf2
 
-    # ---- Linux/Ctrl variant (override keymap: config/totem_linux.keymap) ----
-    - name: Build left half (Linux)
+    # ----------------------------------------------------------------
+    # Three physical Totems today: two Mac keymaps + one Linux keymap.
+    # Four BLE IDs so pairs are distinguishable: Totem-Mac-1/2, Totem-Linux-1/2.
+    # Keymap is shared within a host OS; only CONFIG_ZMK_KEYBOARD_NAME differs.
+    # ----------------------------------------------------------------
+
+    # ---- Totem-Mac-1 (keymap: totem.keymap) ----
+    - name: Build Totem-Mac-1 left
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_left
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_mac_1.conf"
+    - name: Rename Totem-Mac-1 left
+      run: cp build/zephyr/zmk.uf2 totem_mac_1_left.uf2
+    - name: Build Totem-Mac-1 right
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_right
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_mac_1.conf"
+    - name: Rename Totem-Mac-1 right
+      run: cp build/zephyr/zmk.uf2 totem_mac_1_right.uf2
+
+    # ---- Totem-Mac-2 (same Mac keymap, distinct BLE name) ----
+    - name: Build Totem-Mac-2 left
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_left
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_mac_2.conf"
+    - name: Rename Totem-Mac-2 left
+      run: cp build/zephyr/zmk.uf2 totem_mac_2_left.uf2
+    - name: Build Totem-Mac-2 right
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_right
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_mac_2.conf"
+    - name: Rename Totem-Mac-2 right
+      run: cp build/zephyr/zmk.uf2 totem_mac_2_right.uf2
+
+    # ---- Totem-Linux-1 (keymap: totem_linux.keymap) ----
+    - name: Build Totem-Linux-1 left
       run: >
         west build --pristine -s zmk/app -b seeeduino_xiao_ble --
         -DSHIELD=totem_left
         -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
         -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux.conf"
-    - name: Rename left firmware (Linux)
-      run: cp build/zephyr/zmk.uf2 totem_linux_left.uf2
-    - name: Build right half (Linux)
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux_1.conf"
+    - name: Rename Totem-Linux-1 left
+      run: cp build/zephyr/zmk.uf2 totem_linux_1_left.uf2
+    - name: Build Totem-Linux-1 right
       run: >
         west build --pristine -s zmk/app -b seeeduino_xiao_ble --
         -DSHIELD=totem_right
         -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
         -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux.conf"
-    - name: Rename right firmware (Linux)
-      run: cp build/zephyr/zmk.uf2 totem_linux_right.uf2
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux_1.conf"
+    - name: Rename Totem-Linux-1 right
+      run: cp build/zephyr/zmk.uf2 totem_linux_1_right.uf2
+
+    # ---- Totem-Linux-2 (same Linux keymap; no HW yet — flash-ready) ----
+    - name: Build Totem-Linux-2 left
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_left
+        -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux_2.conf"
+    - name: Rename Totem-Linux-2 left
+      run: cp build/zephyr/zmk.uf2 totem_linux_2_left.uf2
+    - name: Build Totem-Linux-2 right
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_right
+        -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux_2.conf"
+    - name: Rename Totem-Linux-2 right
+      run: cp build/zephyr/zmk.uf2 totem_linux_2_right.uf2
 
     - name: Upload firmware
       uses: actions/upload-artifact@v4
       with:
         name: totem-firmware
         path: |
-          totem_macos_left.uf2
-          totem_macos_right.uf2
-          totem_linux_left.uf2
-          totem_linux_right.uf2
+          totem_mac_1_left.uf2
+          totem_mac_1_right.uf2
+          totem_mac_2_left.uf2
+          totem_mac_2_right.uf2
+          totem_linux_1_left.uf2
+          totem_linux_1_right.uf2
+          totem_linux_2_left.uf2
+          totem_linux_2_right.uf2
