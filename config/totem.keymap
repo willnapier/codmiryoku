@@ -247,9 +247,24 @@
     combos {
         compatible = "zmk,combos";
 
-        // Letter combos for :/; abandoned 2026-07-18 (L+U digraph trap; J+L /
-        // P+B drafted then dropped as awkward). Colon/semi = Shift+. / Shift+,
-        // via comma_semi / dot_colon morphs (Urob path). <> remain Q+A / '+O.
+        // Horizontal letter combos (2026-07-24 trial): J+L → : , B+P → ; .
+        // Replaces vertical E+, / I+. (felt slow). Avoids retired L+U (lu/ul digraphs).
+        // JL/LJ rare; BP same-finger index columns — both safer than L+U.
+        // Earlier J+L/P+B draft (2026-07-18) was dropped as "awkward"; retrying now
+        // that verticals proved slow. Shift+. / Shift+, morphs kept as backup.
+        // Hyphen stays vertical N+H (not M+N — mn/nm digraph risk).
+        combo_colon {
+            timeout-ms = <40>;
+            key-positions = <5 6>;  // J + L
+            bindings = <&kp COLON>;
+            layers = <BASE>;
+        };
+        combo_semicolon {
+            timeout-ms = <40>;
+            key-positions = <3 4>;  // P + B
+            bindings = <&kp SEMI>;
+            layers = <BASE>;
+        };
 
         // N + H = - (minus/hyphen) — vertical home+bottom (Urob-style), 2026-07-19.
         // Replaces horizontal U+Y which still false-fired on uy/yu rolls (buy/guy).
@@ -260,21 +275,6 @@
             timeout-ms = <40>;
             key-positions = <16 27>;  // N + H
             bindings = <&kp MINUS>;
-            layers = <BASE>;
-        };
-
-        // Vertical ; / : (2026-07-20) — home+bottom, same-finger; no Shift needed.
-        // Complements Urob Shift+,/. morphs (kept as backup). Totem 38 positions.
-        combo_semicolon {
-            timeout-ms = <40>;
-            key-positions = <17 28>;  // E + ,
-            bindings = <&kp SEMI>;
-            layers = <BASE>;
-        };
-        combo_colon {
-            timeout-ms = <40>;
-            key-positions = <18 29>;  // I + .
-            bindings = <&kp COLON>;
             layers = <BASE>;
         };
 
