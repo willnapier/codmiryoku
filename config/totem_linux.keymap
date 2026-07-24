@@ -280,33 +280,47 @@
     combos {
         compatible = "zmk,combos";
 
-        // Horizontal letter combos (2026-07-24 trial): J+L → : , B+P → ; .
-        // Replaces vertical E+, / I+. (felt slow). Avoids retired L+U (lu/ul digraphs).
-        // JL/LJ rare; BP same-finger index columns — both safer than L+U.
-        // Earlier J+L/P+B draft (2026-07-18) was dropped as "awkward"; retrying now
-        // that verticals proved slow. Shift+. / Shift+, morphs kept as backup.
-        // Hyphen stays vertical N+H (not M+N — mn/nm digraph risk).
+        // Punct dual paths (2026-07-24 trial): keep verticals AND horizontals so both
+        // can be compared in real typing. Shift+. / Shift+, morphs remain as backup.
+        // Colon:  horizontal J+L  |  vertical I+.
+        // Semi:   horizontal P+B  |  vertical E+,
+        // Hyphen: vertical N+H    |  horizontal M+N  (mn digraph risk accepted for trial)
         combo_colon {
             timeout-ms = <40>;
-            key-positions = <5 6>;  // J + L
+            key-positions = <5 6>;  // J + L (horizontal)
+            bindings = <&kp COLON>;
+            layers = <BASE>;
+        };
+        combo_colon_vert {
+            timeout-ms = <40>;
+            key-positions = <18 29>;  // I + . (vertical)
             bindings = <&kp COLON>;
             layers = <BASE>;
         };
         combo_semicolon {
             timeout-ms = <40>;
-            key-positions = <3 4>;  // P + B
+            key-positions = <3 4>;  // P + B (horizontal)
+            bindings = <&kp SEMI>;
+            layers = <BASE>;
+        };
+        combo_semicolon_vert {
+            timeout-ms = <40>;
+            key-positions = <17 28>;  // E + , (vertical)
             bindings = <&kp SEMI>;
             layers = <BASE>;
         };
 
-        // N + H = - (minus/hyphen) — vertical home+bottom (Urob-style), 2026-07-19.
-        // Replaces horizontal U+Y which still false-fired on uy/yu rolls (buy/guy).
-        // Same-finger flatten: no English digraph path. No prior-idle so mid-stream
-        // a-b / foo-bar still works (matches bracket verticals). U+Y freed on BASE;
-        // NAV still uses U+Y for browser-forward.
+        // Hyphen dual path: N+H vertical (Urob-style) + M+N horizontal trial.
+        // U+Y remains free on BASE (NAV still uses U+Y for browser-forward).
         combo_minus {
             timeout-ms = <40>;
-            key-positions = <16 27>;  // N + H
+            key-positions = <16 27>;  // N + H (vertical)
+            bindings = <&kp MINUS>;
+            layers = <BASE>;
+        };
+        combo_minus_horiz {
+            timeout-ms = <40>;
+            key-positions = <15 16>;  // M + N (horizontal)
             bindings = <&kp MINUS>;
             layers = <BASE>;
         };
