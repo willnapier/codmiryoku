@@ -44,22 +44,41 @@ jobs:
       run: west zephyr-export
     
     # ---- macOS/Cmd variant (default keymap: config/totem.keymap) ----
+    # EXTRA_CONF_FILE sets BLE name "Totem Mac" (vs "Totem Linux") on central.
     - name: Build left half (macOS)
-      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_left
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_macos.conf"
     - name: Rename left firmware (macOS)
       run: cp build/zephyr/zmk.uf2 totem_macos_left.uf2
     - name: Build right half (macOS)
-      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_right
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_macos.conf"
     - name: Rename right firmware (macOS)
       run: cp build/zephyr/zmk.uf2 totem_macos_right.uf2
 
     # ---- Linux/Ctrl variant (override keymap: config/totem_linux.keymap) ----
     - name: Build left half (Linux)
-      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_left -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap" -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_left
+        -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux.conf"
     - name: Rename left firmware (Linux)
       run: cp build/zephyr/zmk.uf2 totem_linux_left.uf2
     - name: Build right half (Linux)
-      run: west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=totem_right -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap" -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD=totem_right
+        -DKEYMAP_FILE="${GITHUB_WORKSPACE}/config/totem_linux.keymap"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/totem_linux.conf"
     - name: Rename right firmware (Linux)
       run: cp build/zephyr/zmk.uf2 totem_linux_right.uf2
 
