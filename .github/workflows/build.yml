@@ -125,6 +125,23 @@ jobs:
     - name: Rename Totem-Linux-2 right
       run: cp build/zephyr/zmk.uf2 totem_linux_2_right.uf2
 
+    # settings_reset — required after changing CONFIG_ZMK_KEYBOARD_NAME (ZMK
+    # persists the BT advertise name; a normal reflash alone leaves "TOTEM").
+    - name: Build left settings_reset
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD="totem_left settings_reset"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+    - name: Rename left settings_reset
+      run: cp build/zephyr/zmk.uf2 totem_settings_reset_left.uf2
+    - name: Build right settings_reset
+      run: >
+        west build --pristine -s zmk/app -b seeeduino_xiao_ble --
+        -DSHIELD="totem_right settings_reset"
+        -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+    - name: Rename right settings_reset
+      run: cp build/zephyr/zmk.uf2 totem_settings_reset_right.uf2
+
     - name: Upload firmware
       uses: actions/upload-artifact@v4
       with:
@@ -138,3 +155,5 @@ jobs:
           totem_linux_1_right.uf2
           totem_linux_2_left.uf2
           totem_linux_2_right.uf2
+          totem_settings_reset_left.uf2
+          totem_settings_reset_right.uf2

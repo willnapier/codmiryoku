@@ -34,7 +34,16 @@ Artifact: **`totem-firmware`**
 | `totem_linux_1_left.uf2` / `_right.uf2` | Totem-Linux-1 |
 | `totem_linux_2_left.uf2` / `_right.uf2` | Totem-Linux-2 (future) |
 
-After a name change: forget old Bluetooth devices on the host, then re-pair.
+### BLE rename requires settings_reset
+
+ZMK **persists** the advertise name. Reflashing new UF2s alone leaves the old
+name (e.g. `TOTEM`). Per pair, in order:
+
+1. Flash `totem_settings_reset_left.uf2` then `_right.uf2` (wipes settings/bonds)
+2. Flash the numbered firmware for that pair (left, then right)
+3. On the host: forget old `TOTEM` / prior Totem entries
+4. Power left (central) then right; re-pair — should show `Totem-Mac-1` etc.
+
 Double-tap reset → volume usually `XIAO-SENSE`.
 
 ## Keymap source of truth
