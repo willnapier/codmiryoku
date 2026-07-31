@@ -280,7 +280,8 @@
     combos {
         compatible = "zmk,combos";
 
-        // Phase 1 (2026-07-31): colon/semi/minus/plus also active on NAV (BASE NAV).
+        // Phase 1 (2026-07-31): colon/semi/minus/plus also active on NUM (BASE NUM)
+// so symbols work while holding the num layer (no lift to type + - : ;).
         // Punct dual paths (2026-07-24 trial): keep verticals AND horizontals so both
         // can be compared in real typing. Shift+. / Shift+, morphs remain as backup.
         // Colon:  horizontal J+L  |  vertical I+.
@@ -290,25 +291,25 @@
             timeout-ms = <40>;
             key-positions = <5 6>;  // J + L (horizontal)
             bindings = <&kp COLON>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
         combo_colon_vert {
             timeout-ms = <40>;
             key-positions = <18 29>;  // I + . (vertical)
             bindings = <&kp COLON>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
         combo_semicolon {
             timeout-ms = <40>;
             key-positions = <3 4>;  // P + B (horizontal)
             bindings = <&kp SEMI>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
         combo_semicolon_vert {
             timeout-ms = <40>;
             key-positions = <17 28>;  // E + , (vertical)
             bindings = <&kp SEMI>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
 
         // Hyphen dual path: N+H vertical (Urob-style) + M+N horizontal trial.
@@ -317,13 +318,13 @@
             timeout-ms = <40>;
             key-positions = <16 27>;  // N + H (vertical)
             bindings = <&kp MINUS>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
         combo_minus_horiz {
             timeout-ms = <40>;
             key-positions = <15 16>;  // M + N (horizontal)
             bindings = <&kp MINUS>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
 
         // , + . = ? (question mark) / ! (exclamation when shifted)
@@ -475,7 +476,7 @@
             require-prior-idle-ms = <150>;
             key-positions = <27 28>;  // H + ,
             bindings = <&plus_equal>;
-            layers = <BASE NAV>;
+            layers = <BASE NUM>;
         };
 
         // . + / = ! (exclamation). Y+' is now Esc (was £); £ lives on NUM layer.
