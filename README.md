@@ -46,6 +46,26 @@ name (e.g. `TOTEM`). Per pair, in order:
 
 Double-tap reset → volume usually `XIAO-SENSE`.
 
+### Totem-Linux-1 left-half reset constraint
+
+The physical reset switch on the **Totem-Linux-1 left half** mechanically
+clicks but did not enter the XIAO bootloader on 2026-08-27. The normal
+firmware's software route, **hold left Space/NAV + tap Q**, was verified to
+mount `XIAO-SENSE`. The right half's physical reset works normally.
+
+Routine keymap changes (bindings, layers, combos, macros, hold-taps) do **not**
+need a settings reset and can continue through the software bootloader.
+
+Before any larger Totem-Linux change that *does* require wiping persistent
+settings (for example a BLE rename, bond recovery, or split-role/storage
+change), stop and first provide a **recoverable left reset image**. Do not flash
+the current stock `totem_settings_reset_left.uf2`: ZMK's `settings_reset`
+shield uses a mock scanner, so NAV+Q is unavailable after it boots. Build the
+left reset image from the real `totem_left` shield and normal Linux keymap with
+`CONFIG_ZMK_SETTINGS_RESET_ON_START=y`; after the wipe, use NAV+Q to return to
+`XIAO-SENSE` and flash the normal left firmware. Independently repairing the
+physical reset circuit remains desirable.
+
 ## Keymap source of truth
 
 - Mac: `config/totem.keymap` ↔ Temper `temper.keymap`
