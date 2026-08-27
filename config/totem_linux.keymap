@@ -5,7 +5,8 @@
  *
  * LINUX-SPECIFIC TOTEM KEYMAP (Ctrl edit commands)
  * Ported from piantor_pro_bt.keymap (42-key) to Totem (38-key); the Linux twin of totem.keymap (macOS).
- * British Pound (£) on SYM+D — pound_macro compose sequence (Menu, L, -) via ~/.XCompose
+ * British Pound (£) on NUM+Shift+D (num3_pound morph — Mac parity) AND on SYM+D
+ *   (pound_macro). Both are compose sequences (Menu, L, -) via ~/.XCompose.
  * Hash (#) on SYM+C (Shift+3 on the XKB "us" layout niri enforces)
  * Euro (€) on SYM+P — euro_macro compose sequence (Menu, c, =) via ~/.XCompose
  * Section sign (§) on SYM+V — section_macro compose sequence (Menu, s, o) via ~/.XCompose
@@ -50,6 +51,28 @@
             wait-ms = <30>;
             tap-ms = <30>;
             bindings = <&kp K_APP>, <&kp L>, <&kp MINUS>;
+        };
+
+        // £ from under a HELD Shift — the NUM+Shift+D path (Mac muscle memory).
+        // Explicitly releases both Shifts first rather than trusting the
+        // mod-morph mask: the morph re-registers the masked mods on KEY RELEASE,
+        // which on a quick tap lands mid-macro and would turn the trailing "-"
+        // into "_". ~/.XCompose also accepts <underscore> as a belt-and-braces.
+        // Side effect: a Shift physically held across this macro is released at
+        // the HID level; it re-arms on the next physical press. Acceptable for a
+        // tap-and-release chord.
+        pound_shift_macro: pound_shift_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings
+                = <&macro_release &kp LSHFT>
+                , <&macro_release &kp RSHFT>
+                , <&macro_tap &kp K_APP>
+                , <&macro_tap &kp L>
+                , <&macro_tap &kp MINUS>
+                ;
         };
 
         // Euro (€) via compose sequence (Menu, c, =) — in the default X Compose file
@@ -179,6 +202,17 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp PLUS>, <&kp EQUAL>;   // Normal = + vs Shift = =
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // NUM+D: 3 unshifted, £ shifted. Mirrors the macOS twin, where the same
+        // chord is Shift+3 = £ on the British layout. On XKB "us" Shift+3 is #,
+        // so Linux needs the compose macro to reach the same character.
+        // # remains on SYM+C.
+        num3_pound: num3_pound_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N3>, <&pound_shift_macro>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -539,7 +573,7 @@
             bindings = <
                 &kp LPAR        &kp N7          &kp N8          &kp N9          &kp RPAR        &none           &none           &none            &none          &bootloader
                 &kp GRAVE       &kp N4          &kp N5          &kp N6          &kp EQUAL       &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
-                &trans          &kp TILDE       &kp N1          &kp N2          &kp N3          &kp PIPE        &kp STAR        &kp EQUAL        &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
+                &trans          &kp TILDE       &kp N1          &kp N2          &num3_pound     &kp PIPE        &kp STAR        &kp EQUAL        &kp COMMA       &kp DOT         &kp FSLH        &sys_reset
                                                 &none           &kp N0          &none           &none           &none           &kp DEL
             >;
         };
