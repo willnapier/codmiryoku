@@ -55,10 +55,16 @@ Double-tap reset → volume usually `XIAO-SENSE`.
 > instantly, and **NAV+Q mounted `XIAO-SENSE` first time there**. A dead USB data
 > path produces the exact symptom recorded below — the reset fires, the MCU
 > enters the bootloader, and no volume can mount. **The switch has NOT been shown
-> to be faulty.** Settle it with a five-second double-tap while the half is
-> plugged into nimbini, then rewrite this section. Until then, treat the warning
-> about `totem_settings_reset_left.uf2` as a precaution resting on an unproven
-> premise, not an established constraint.
+> to be faulty**, and it has not been retested on a working USB host.
+>
+> **This is not an outstanding action.** NAV+Q is a proven route and covers all
+> normal flashing, so the switch is off the critical path. It matters in exactly
+> one scenario: a settings wipe. `totem_settings_reset_left.uf2` boots with a
+> mock scanner, so NAV+Q is unavailable once it runs — and if the physical reset
+> were also dead, that half would be unreachable. The precaution below therefore
+> stands, but it rests on an unproven premise. If you are ever about to do a
+> settings wipe, double-tap the reset with the half plugged into **nimbini**
+> first: five seconds, and it either removes the precaution or confirms it.
 
 The physical reset switch on the **Totem-Linux-1 left half** mechanically
 clicks but did not enter the XIAO bootloader on 2026-08-27 **when connected to
