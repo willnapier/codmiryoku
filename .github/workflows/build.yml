@@ -3,8 +3,13 @@ name: Build ZMK firmware
 on:
   push:
     branches: [ main, master ]
+    # Docs-only pushes must not build a UF2 — a firmware image that differs from
+    # the flashed one for no functional reason invites a pointless reflash, and
+    # the friction was actively deterring README corrections (2026-08-27).
+    paths-ignore: [ "**/*.md" ]
   pull_request:
     branches: [ main, master ]
+    paths-ignore: [ "**/*.md" ]
   workflow_dispatch:
 
 jobs:
