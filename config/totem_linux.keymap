@@ -5,8 +5,9 @@
  *
  * LINUX-SPECIFIC TOTEM KEYMAP (Ctrl edit commands)
  * Ported from piantor_pro_bt.keymap (42-key) to Totem (38-key); the Linux twin of totem.keymap (macOS).
- * British Pound (£) on NUM+Shift+D (num3_pound morph — Mac parity) AND on SYM+D
- *   (pound_macro). Both are compose sequences (Menu, L, -) via ~/.XCompose.
+ * British Pound (£) on NUM+Shift+D ONLY (num3_pound morph — same chord as the
+ *   macOS twin). Compose sequence (Menu, L, -) via ~/.XCompose. SYM+D is PIPE,
+ *   matching the Mac.
  * Hash (#) on SYM+C (Shift+3 on the XKB "us" layout niri enforces)
  * Euro (€) on SYM+P — euro_macro compose sequence (Menu, c, =) via ~/.XCompose
  * Section sign (§) on SYM+V — section_macro compose sequence (Menu, s, o) via ~/.XCompose
@@ -43,15 +44,11 @@
 
 / {
     macros {
-        // British Pound Sterling via compose sequence (Menu, L, -)
-        // Works with ~/.XCompose on Linux
-        pound_macro: pound_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <30>;
-            tap-ms = <30>;
-            bindings = <&kp K_APP>, <&kp L>, <&kp MINUS>;
-        };
+        // £ has exactly ONE route on Linux: NUM+Shift+D, via pound_shift_macro
+        // below. The old shift-free pound_macro was deleted 2026-08-27 when SYM+D
+        // reverted to PIPE — an unbound macro is what hid the original bug for
+        // five weeks, so do not leave one lying around. See
+        // ~/Assistants/shared/ZMK-SYMBOL-LAYER.md.
 
         // £ from under a HELD Shift — the NUM+Shift+D path (Mac muscle memory).
         // Explicitly releases both Shifts first rather than trusting the
@@ -459,8 +456,8 @@
         };
 
         // Esc bilateral (rare bigrams); frees outer thumbs for dual Shift.
-        // £ dropped from Y+' — Linux £ is SYM+D (pound_macro). NB NUM+Shift+D
-        // is £ on the macOS twin only (British layout); on XKB "us" it is #.
+        // £ dropped from Y+' — Linux £ is NUM+Shift+D (num3_pound morph),
+        // the same chord as the macOS twin. Plain NUM+D is still 3.
         combo_esc {
             timeout-ms = <50>;
             key-positions = <0 1>;  // Q + W (left)
@@ -515,7 +512,7 @@
             layers = <BASE NUM>;
         };
 
-        // . + / = ! (exclamation). Y+' is now Esc (was £); Linux £ is SYM+D.
+        // . + / = ! (exclamation). Y+' is now Esc (was £); £ is NUM+Shift+D.
         // 50/150: sequential ./ paths type normally; deliberate mash after pause = !.
         combo_exclaim {
             timeout-ms = <50>;
@@ -564,7 +561,7 @@
             bindings = <
                 &kp LBRC        &kp AMPS        &kp ASTRK       &euro_macro     &kp RBRC        &none           &to BASE        &none           &none           &bootloader
                 &kp SEMI        &kp DLLR        &kp PRCNT       &kp CARET       &kp PLUS        &none           &kp LSHFT       &kp LGUI        &kp LALT        &kp LCTRL
-                &kp TILDE       &kp EXCL        &kp AT          &kp LS(N3)      &pound_macro    &section_macro  &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans          &trans
+                &kp TILDE       &kp EXCL        &kp AT          &kp LS(N3)      &kp PIPE        &section_macro  &to SYM         &to MOUSE       &kp RALT        &sys_reset      &trans          &trans
                                                 &none           &none           &none           &none           &none           &none
             >;
         };
